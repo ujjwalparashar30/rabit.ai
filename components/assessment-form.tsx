@@ -162,19 +162,24 @@ export function AssessmentForm({ step, onNext, onPrevious, canGoBack }: Assessme
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (step === questions.length - 1) {
-      try {
-        const response = await fetch("http://localhost:3001/api/roadmap", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
-        const data = await response.json();
-        // For now, just log what was sent and what was received
-        console.log("Sent to server:", formData);
-        console.log("Received from server:", data);
-      } catch (error) {
-        console.error("Error sending data to server:", error);
-      }
+      // For now, just render the dashboard (simulate assessment complete)
+      localStorage.setItem("assessmentData", JSON.stringify(formData));
+      window.location.href = "/dashboard";
+
+      // Uncomment below to send to backend:
+      // try {
+      //   const response = await fetch("http://localhost:3001/api/roadmap", {
+      //     method: "POST",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify(formData),
+      //   });
+      //   const data = await response.json();
+      //   // For now, just log what was sent and what was received
+      //   console.log("Sent to server:", formData);
+      //   console.log("Received from server:", data);
+      // } catch (error) {
+      //   console.error("Error sending data to server:", error);
+      // }
     } else {
       onNext(formData);
     }
