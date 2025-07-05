@@ -9,14 +9,66 @@ import { ArrowLeft } from "lucide-react"
 import { AssessmentForm } from "@/components/assessment-form"
 import Link from "next/link"
 
+// Types for assessment data
+interface GitHubInsights {
+  totalRepositories: number;
+  languageDistribution: Record<string, number>;
+  contributionStreak: number;
+  topRepositories: string[];
+  recentActivity: string[];
+  skillsFromRepos: string[];
+}
+
+interface ProgressChart {
+  totalWeeks: number;
+  weeklyHours: number;
+  completedHours: number;
+  targetHours: number;
+  weeklyProgress: Array<{
+    week: number;
+    planned: number;
+    actual: number;
+  }>;
+}
+
+interface RoadmapItem {
+  title: string;
+  completed: boolean;
+  priority: "high" | "medium" | "low";
+}
+
+interface RecommendedResources {
+  youtube: string[];
+  openSource: string[];
+  linkedin: string[];
+}
+
+interface AssessmentData {
+  track: string;
+  timeline: string;
+  skillLevel: string;
+  timeCommitment: string;
+  technologies?: string[];
+  dsaInvolvement?: string;
+  currentProjects?: string;
+  experience?: string;
+  roadmap: RoadmapItem[];
+  githubInsights: GitHubInsights;
+  progressChart: ProgressChart;
+  recommendedResources: RecommendedResources;
+}
+
+// Type for form step data
+type FormStepData = Partial<AssessmentData>;
+
 export default function AssessmentPage() {
   const [currentStep, setCurrentStep] = useState(0)
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState<Partial<AssessmentData>>({})
 
   const totalSteps = 10
   const progress = ((currentStep + 1) / totalSteps) * 100
 
-  const handleNext = (data: any) => {
+  const handleNext = (data: FormStepData) => {
     setFormData((prev) => ({ ...prev, ...data }))
     if (currentStep < totalSteps - 1) {
       setCurrentStep((prev) => prev + 1)
@@ -46,7 +98,7 @@ export default function AssessmentPage() {
           </Link>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Let's Build Your Roadmap</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Lets Build Your Roadmap</h1>
             <p className="text-gray-600 mb-6">Answer a few questions to get your personalized coding journey</p>
             <Progress value={progress} className="max-w-md mx-auto" />
             <p className="text-sm text-gray-500 mt-2">

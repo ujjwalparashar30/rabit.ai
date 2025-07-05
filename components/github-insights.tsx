@@ -53,6 +53,7 @@ export function GitHubInsights() {
       setRepos(reposData)
     } catch (err) {
       setError("Failed to fetch GitHub data. Please check the username.")
+      console.error(err)
       setUser(null)
       setRepos([])
     } finally {

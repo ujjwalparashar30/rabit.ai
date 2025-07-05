@@ -12,7 +12,7 @@ export function ProgressChart() {
     { week: "Week 4", completed: 8, target: 12 },
   ]
 
-  const maxValue = Math.max(...progressData.map((d) => Math.max(d.completed, d.target)))
+  // const maxValue = Math.max(...progressData.map((d) => Math.max(d.completed, d.target)))
 
   return (
     <Card>

@@ -47,7 +47,7 @@ export function DashboardContent() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome to Your Coding Journey! 🚀</h1>
         <p className="text-gray-600">
-          Based on your assessment, we've created a personalized roadmap for your{" "}
+          Based on your assessment, we have created a personalized roadmap for your{" "}
           <Badge variant="secondary" className="mx-1">
             {assessmentData.track === "faang" ? "FAANG" : assessmentData.track === "startup" ? "Startup" : "Balanced"}{" "}
             Track
